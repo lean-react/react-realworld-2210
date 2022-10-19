@@ -1,4 +1,11 @@
-import { Button } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+} from '@mui/material';
+import { Box } from '@mui/system';
 import { FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,24 +41,37 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="acc">Account:</label>
-          <input required ref={accFld} id="acc"></input>
-        </div>
-        <div>
-          <label htmlFor="password">Passwort:</label>
-          <input required ref={pwFld} id="password" type="password" />
-        </div>
-        <div>
+    <form onSubmit={handleSubmit}>
+      <Card sx={{ mt: 4, mx: 'auto', pb: 2, maxWidth: 480 }}>
+        <CardContent>
+          <h2>Login</h2>
+          <div>
+            <TextField
+              size="small"
+              ref={accFld}
+              id="acc"
+              label="Account"
+              required
+            />
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            <TextField
+              size="small"
+              type="password"
+              ref={pwFld}
+              id="pw"
+              label="Passwort"
+              required
+            />
+          </div>
+        </CardContent>
+        <CardActions sx={{ justifyContent: 'center' }}>
           <Button type="submit" variant="contained">
             Anmelden
           </Button>
-        </div>
-      </form>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-    </div>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+        </CardActions>
+      </Card>
+    </form>
   );
 }
