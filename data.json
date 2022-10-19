@@ -1,0 +1,16 @@
+{
+  "articles": [
+    {
+      "id": 17,
+      "artNr": "P1010",
+      "name": "Döner",
+      "price": 4.5
+    },
+    {
+      "artNr": "P1011",
+      "name": "Pommes",
+      "price": 3.4,
+      "id": 18
+    }
+  ]
+}
