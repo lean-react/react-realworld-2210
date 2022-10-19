@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom';
 import { AuthBoundary } from './auth';
 
 import AboutPage from './pages/about';
+import ArticlePage from './pages/article';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import TodosPage from './pages/todos';
@@ -18,7 +19,7 @@ export const appRoutes: RouteObject[] = [
         element: <AuthBoundary />,
         children: [
           { path: '/todos', element: <TodosPage /> },
-          { path: '/artikel', element: <TodosPage /> },
+          { path: '/artikel', element: <ArticlePage /> },
         ],
       },
     ],
