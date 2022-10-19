@@ -1,7 +1,10 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink, Outlet } from 'react-router-dom';
+import { useAuth } from '../auth';
 
 export default function Layout() {
+  const { isAuthenticated, signOut } = useAuth();
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -18,13 +21,24 @@ export default function Layout() {
               >
                 Home
               </Button>
-              <Button
-                component={RouterLink}
-                to="/todos"
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Todos
-              </Button>
+              {isAuthenticated && (
+                <>
+                  <Button
+                    component={RouterLink}
+                    to="/todos"
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    Todos
+                  </Button>
+                  <Button
+                    component={RouterLink}
+                    to="/artikel"
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    Artikel
+                  </Button>
+                </>
+              )}
               <Button
                 component={RouterLink}
                 to="/about"
@@ -32,13 +46,22 @@ export default function Layout() {
               >
                 About
               </Button>
-              <Button
-                component={RouterLink}
-                to="/login"
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Login
-              </Button>
+              {isAuthenticated ? (
+                <Button
+                  onClick={signOut}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Button
+                  component={RouterLink}
+                  to="/login"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Login
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </AppBar>

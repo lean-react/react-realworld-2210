@@ -5,15 +5,17 @@ import {
   CardContent,
   TextField,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import { FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth';
 
 export default function LoginPage() {
   const [error, setError] = useState('');
 
   const accFld = useRef<HTMLInputElement>(null);
   const pwFld = useRef<HTMLInputElement>(null);
+
+  const { signIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -22,16 +24,15 @@ export default function LoginPage() {
   // Das Gegenteil (controlled inputs) werden über value (checked, selected, ...) und
   // onChange-Handler an einen state gebunden (useState())
 
-  function handleSubmit(ev: FormEvent) {
+  async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
     if (accFld.current && pwFld.current) {
       const acc = accFld.current.value;
       const pw = pwFld.current.value;
 
-      // Todo: real world password check
-      if (pw === 'geheim') {
-        // Todo: log user on
+      const success = await signIn(acc, pw);
+      if (success) {
         navigate('/');
       } else {
         setError('Account und/oder Passwort falsch');
@@ -48,7 +49,7 @@ export default function LoginPage() {
           <div>
             <TextField
               size="small"
-              ref={accFld}
+              inputRef={accFld}
               id="acc"
               label="Account"
               required
@@ -58,7 +59,7 @@ export default function LoginPage() {
             <TextField
               size="small"
               type="password"
-              ref={pwFld}
+              inputRef={pwFld}
               id="pw"
               label="Passwort"
               required
