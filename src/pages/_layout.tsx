@@ -1,12 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Link,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink, Outlet } from 'react-router-dom';
 
 export default function Layout() {
@@ -42,7 +34,7 @@ export default function Layout() {
               </Button>
               <Button
                 component={RouterLink}
-                to="/"
+                to="/login"
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Login
@@ -51,7 +43,6 @@ export default function Layout() {
           </Toolbar>
         </AppBar>
       </Box>
-
       <Outlet />
     </div>
   );
